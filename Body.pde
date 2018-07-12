@@ -1,7 +1,7 @@
 class Body {
  
-  float mass , speed , rad;
-  PVector location, acceleration, velocity;
+  private float mass , speed , rad;
+  private PVector location, acceleration, velocity;
   
   Body(PVector loc , float mass){
     
@@ -15,7 +15,7 @@ class Body {
   }
   
   void display(){
-    ellipse(location.x,location.y,mass * 1.5, mass * 1.5);
+    ellipse(location.x,location.y,mass * 1.2, mass * 1.2);
   }
   
   private void stopMove(){
@@ -51,7 +51,9 @@ class Body {
        //Physics.applyForce(normal,ball);
      }
   }
-  if (location.y + rad > height) {
+  
+  
+  if (location.y + (rad+3) > height) {
      
     
     location.y = height - rad;
