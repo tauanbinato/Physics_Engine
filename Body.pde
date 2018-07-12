@@ -1,14 +1,13 @@
 class Body {
  
-  float mass , b_width , b_height , speed , rad;
+  float mass , speed , rad;
   PVector location, acceleration, velocity;
   
   Body(PVector loc , float mass){
     
     this.mass = mass;
-    b_width = mass;
-    b_height = mass;
     rad = mass;
+    
     speed = 0.0;
     location = loc;
     acceleration = new PVector(0,0);
@@ -27,10 +26,10 @@ class Body {
     
     velocity.add(acceleration);
     location.add(velocity);
+    println(location);
     acceleration.mult(0);
     checkBounce();
-    println("Velocity: " + velocity);
-    println("Mag: " + velocity.mag());
+    
      
   }
   
@@ -39,22 +38,31 @@ class Body {
     // Test to see if the shape exceeds the boundaries of the screen
   // If it does, reverse its direction by multiplying by -1
   if (location.x > width - rad || location.x < 0) {
-     velocity.x *= -0.95;
-     if(velocity.x < 0){
-       location.x = width - rad;
-       if(velocity.x > -0.5 && velocity.x < 0.5 ){
-       velocity.x=0; 
-      }
-     }
-  }
-  if (location.y > height - rad || location.y < 0) {
+     
+    location.x = height - rad;
      
      if(velocity.mag() > 0.5){
-       println("ENTROU");
-       velocity.y *= -0.95;
-       location.y = height - rad;
-     }else{
+       velocity.x *= -0.95;
+       
+     }
+     else
+     {
        stopMove();
+       //Physics.applyForce(normal,ball);
+     }
+  }
+  if (location.y + rad > height) {
+     
+    
+    location.y = height - rad;
+     if(velocity.mag() > 0.5){
+       velocity.y *= -0.95;
+ 
+     }
+     else
+     {
+       stopMove();
+       Physics.applyForce(normal,ball);
      }
      
      
