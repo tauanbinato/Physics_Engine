@@ -1,37 +1,36 @@
 class Static_Body{
   
-  private PVector location, size;
+  PVector location, size;
+  String shape;
   
-  
-  Static_Body(Shape shape, PVector loc , PVector size){
+  Static_Body(String _shape, PVector _location , PVector _size){
     
-    location = new PVector();
-    size = new PVector();
-    this.location = loc.copy();
-    this.size = size.copy();
-    
-    display(shape);
+    location = new PVector(0,0);
+    size = new PVector(0,0);
+    this.location = _location.copy();
+    this.size = _size.copy();
+    this.shape = _shape;
   }
   
-  void display(Shape shape){
-    
-    switch(shape){
+  
+   void display(){
       
-      case rect:
-        rect(location.x,location.y, this.size.x , this.size.y);
-        break;
-        
-      case circle:
-        ellipse(location.x,location.y, this.size.x , this.size.y);
-        break;
-        
-      default:
-        ellipse(location.x,location.y, this.size.x , this.size.y);
-        println("Default!");
-        break;
+      if (shape.equals("Rect")) {
+        fill(255);
+        rect(location.x,location.y, size.x , size.y);
+      } 
+      else if (shape.equals("Circle")) {
+        ellipse(location.x,location.y, size.x , size.y);
+      } 
+      else {
+      // default
+        //ellipse(location.x,location.y, this.size.x , this.size.y);
+        //println("Default!");
+      }
+      
+     
     
   }
   
   
-}
 }

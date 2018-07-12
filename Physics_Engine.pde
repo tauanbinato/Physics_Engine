@@ -1,5 +1,6 @@
 //Globals
 Body ball = new Body(new PVector(100f,700f) , 50f);
+Static_Body floor = new Static_Body("Rect", new PVector(0,700),new PVector(800,30));
 
 //Forces
 PVector gravity = new PVector(0,50f);
@@ -22,6 +23,7 @@ void setup() {
 void draw() {
   int m = millis();
   background(0);
+  floor.display();
   Physics.applyForce(gravity,ball);
  // Physics.applyForce(wind,ball);
   
