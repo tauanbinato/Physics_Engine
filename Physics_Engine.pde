@@ -1,6 +1,6 @@
 //Globals
-Body ball = new Body(new PVector(100f,700f) , 50f);
-Static_Body floor = new Static_Body("Rect", new PVector(0,700),new PVector(800,30));
+Body ball;
+Static_Body floor;
 
 //Forces
 PVector gravity = new PVector(0,50f);
@@ -8,16 +8,24 @@ PVector normal = gravity.copy().mult(-1f);
 PVector wind = new PVector(0.5f,-0.0f);
 static float pixelFactor;
 
-void calPixelToCm(){
- 
+void calPixelToCm()
+{
   pixelFactor = height/23;
-  
 }
 
 void setup() {
+  //Initial Functions
   calPixelToCm();
+  
+  //Changing some modes
   ellipseMode(RADIUS);
-  size(800, 800); 
+  
+  //Setting the screen
+  size(800, 800);
+  
+  //Initializing Bodies
+  ball  = new Body("Circle",new PVector(100f,300f) , 50f);
+  floor = new Static_Body("Rect", new PVector(0,float(height - 100)),new PVector(float(width),30));
 }
 
 void draw() {
@@ -26,6 +34,8 @@ void draw() {
   floor.display();
   Physics.applyForce(gravity,ball);
  // Physics.applyForce(wind,ball);
+  
+  //Physics.checkCollisionStatic(ball,floor);
   
   ball.display();
   ball.move();

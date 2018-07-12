@@ -2,8 +2,9 @@ class Body {
  
   private float mass , speed , rad;
   private PVector location, acceleration, velocity;
+  String shape;
   
-  Body(PVector loc , float mass){
+  Body(String _shape,PVector loc , float mass){
     
     this.mass = mass;
     rad = mass;
@@ -12,10 +13,25 @@ class Body {
     location = loc;
     acceleration = new PVector(0,0);
     velocity = new PVector(0,0);
+    this.shape = _shape.toLowerCase();;
   }
   
   void display(){
-    ellipse(location.x,location.y,mass * 1.2, mass * 1.2);
+    
+    if (shape.equals("rect")) {
+        fill(255);
+        rect(location.x,location.y, mass * 1.2, mass * 1.2);
+      } 
+      else if (shape.equals("circle")) {
+        ellipse(location.x,location.y, mass * 1.2, mass * 1.2);
+      } 
+      else {
+      // default
+        ellipse(location.x,location.y, mass * 1.2, mass * 1.2);
+       
+      }
+    
+    
   }
   
   private void stopMove(){
@@ -67,9 +83,6 @@ class Body {
        Physics.applyForce(normal,ball);
      }
      
-     
-      
-    
      
   }
     

@@ -9,23 +9,23 @@ class Static_Body{
     size = new PVector(0,0);
     this.location = _location.copy();
     this.size = _size.copy();
-    this.shape = _shape;
+    this.shape = _shape.toLowerCase();;
   }
   
   
    void display(){
       
-      if (shape.equals("Rect")) {
+      if (shape.equals("rect")) {
         fill(255);
         rect(location.x,location.y, size.x , size.y);
       } 
-      else if (shape.equals("Circle")) {
+      else if (shape.equals("rircle")) {
         ellipse(location.x,location.y, size.x , size.y);
       } 
       else {
       // default
-        //ellipse(location.x,location.y, this.size.x , this.size.y);
-        //println("Default!");
+        ellipse(location.x,location.y, size.x , size.y);
+       
       }
       
      

@@ -15,4 +15,53 @@ static class Physics{
    return vel;
   }
   
+  static boolean checkCollisionStatic(Body b , Static_Body sb){
+    
+    String sb_shape = sb.shape.toLowerCase();
+    String b_shape = b.shape.toLowerCase();
+    
+    switch(sb_shape){
+     
+      case "rect":
+        
+        switch(b_shape){
+          
+          case "rect":
+          break;
+          
+          case "circle":
+            
+            PVector testEdge = new PVector();
+            if (b.location.x < sb.location.x)
+                testEdge.x = sb.location.x;                    // left edge
+            else if (b.location.x > sb.location.x + sb.size.x) 
+                testEdge.x = sb.location.x + sb.size.x;        // right edge
+
+            if (b.location.y < sb.location.y)
+                testEdge.y = sb.location.y;                    //  top edge
+            else if (b.location.y > sb.location.y + sb.size.y) 
+                testEdge.y = sb.location.y + sb.size.y;        // bottom edge
+          
+          break;
+        }
+      
+      break;
+      
+      case "circule":
+      
+        switch(b_shape){
+          
+          case "rect":
+          break;
+          
+          case "circle":  
+          break;
+        }
+      
+      break;
+    }
+    
+    return true;
+  }
+  
 }
