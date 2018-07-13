@@ -15,6 +15,13 @@ static class Physics{
    return vel;
   }
   
+   private static float calDistance(PVector distPoint , PVector objLocation){
+    
+    float result = 0;
+    return  result = PVector.dist(distPoint,objLocation);
+    
+  }
+  
   static boolean checkCollisionStatic(Body b , Static_Body sb){
     
     String sb_shape = sb.shape.toLowerCase();
@@ -42,7 +49,16 @@ static class Physics{
             else if (b.location.y > sb.location.y + sb.size.y) 
                 testEdge.y = sb.location.y + sb.size.y;        // bottom edge
           
-          break;
+            PVector dist = new PVector();
+            dist.x = b.location.x - testEdge.x;
+            dist.y = b.location.y - testEdge.y;
+            
+            if(calDistance(dist,b.location) <= b.rad){
+               return true;
+            }else {
+               return false;
+            }
+          
         }
       
       break;

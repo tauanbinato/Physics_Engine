@@ -24,7 +24,7 @@ void setup() {
   size(800, 800);
   
   //Initializing Bodies
-  ball  = new Body("Circle",new PVector(100f,300f) , 50f);
+  ball  = new Body("Circle",new PVector(255,0,0),new PVector(100f,300f) , 50f);
   floor = new Static_Body("Rect", new PVector(0,float(height - 100)),new PVector(float(width),30));
 }
 
@@ -35,8 +35,10 @@ void draw() {
   Physics.applyForce(gravity,ball);
  // Physics.applyForce(wind,ball);
   
-  //Physics.checkCollisionStatic(ball,floor);
-  
+  if(Physics.checkCollisionStatic(ball,floor)){
+    
+  }
+
   ball.display();
   ball.move();
   

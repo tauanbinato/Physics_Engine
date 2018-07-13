@@ -1,25 +1,26 @@
 class Body {
  
-  private float mass , speed , rad;
+  private float mass , rad;
   private PVector location, acceleration, velocity;
+  public  PVector b_rgb;
   String shape;
   
-  Body(String _shape,PVector loc , float mass){
+  Body(String _shape, PVector rgb, PVector loc , float mass){
     
+    acceleration = new PVector();
+    velocity     = new PVector();
+    b_rgb        = new PVector();
+    this.b_rgb = rgb.copy();
     this.mass = mass;
-    rad = mass;
-    
-    speed = 0.0;
-    location = loc;
-    acceleration = new PVector(0,0);
-    velocity = new PVector(0,0);
-    this.shape = _shape.toLowerCase();;
+    this.location = loc;
+    this.rad = mass;
+    this.shape   = _shape.toLowerCase();;
   }
   
   void display(){
     
     if (shape.equals("rect")) {
-        fill(255);
+        fill(b_rgb.x,b_rgb.y,b_rgb.z);
         rect(location.x,location.y, mass * 1.2, mass * 1.2);
       } 
       else if (shape.equals("circle")) {
@@ -42,10 +43,8 @@ class Body {
     
     velocity.add(acceleration);
     location.add(velocity);
-    println(location);
     acceleration.mult(0);
-    checkBounce();
-    
+    //checkBounce();
      
   }
   
