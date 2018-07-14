@@ -1,6 +1,6 @@
 class Body {
  
-  private float mass , rad;
+  private float mass , rad , b_width , b_height;
   private PVector location, acceleration, velocity;
   public  PVector b_rgb;
   String shape;
@@ -10,25 +10,31 @@ class Body {
     acceleration = new PVector();
     velocity     = new PVector();
     b_rgb        = new PVector();
-    this.b_rgb = rgb.copy();
-    this.mass = mass;
+    this.b_rgb   = rgb.copy();
+    this.mass    = mass * MASS_MULT;
     this.location = loc;
-    this.rad = mass;
-    this.shape   = _shape.toLowerCase();;
+    this.rad = mass/2;
+    this.shape    = _shape.toLowerCase();;
   }
   
   void display(){
     
     if (shape.equals("rect")) {
         fill(b_rgb.x,b_rgb.y,b_rgb.z);
-        rect(location.x,location.y, mass * 1.2, mass * 1.2);
+        rect(location.x,location.y, mass, mass);
+        this.b_width = mass;
+        this.b_height = mass;
       } 
       else if (shape.equals("circle")) {
-        ellipse(location.x,location.y, mass * 1.2, mass * 1.2);
+        ellipse(location.x,location.y, mass, mass );
+        this.b_width = mass;
+        this.b_height = mass;
       } 
       else {
       // default
-        ellipse(location.x,location.y, mass * 1.2, mass * 1.2);
+        ellipse(location.x,location.y, mass, mass);
+        this.b_width = mass;
+        this.b_height = mass;
        
       }
     
@@ -44,21 +50,20 @@ class Body {
     velocity.add(acceleration);
     location.add(velocity);
     acceleration.mult(0);
-    //checkBounce();
+    checkBounce();
      
   }
   
   private void checkBounce(){
     
     // Test to see if the shape exceeds the boundaries of the screen
-  // If it does, reverse its direction by multiplying by -1
-  if (location.x > width - rad || location.x < 0) {
+    // If it does, reverse its direction by multiplying by a negative number lower then 1.
+  if (location.x + b_width > width || location.x < 0) {
      
-    location.x = height - rad;
+    location.x = width - b_width;
      
      if(velocity.mag() > 0.5){
        velocity.x *= -0.95;
-       
      }
      else
      {
@@ -68,10 +73,10 @@ class Body {
   }
   
   
-  if (location.y + (rad+3) > height) {
+  if (location.y + b_height > height) {
      
     
-    location.y = height - rad;
+    location.y = height - b_height;
      if(velocity.mag() > 0.5){
        velocity.y *= -0.95;
  

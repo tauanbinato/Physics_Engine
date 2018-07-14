@@ -17,8 +17,9 @@ static class Physics{
   
    private static float calDistance(PVector distPoint , PVector objLocation){
     
-    float result = 0;
-    return  result = PVector.dist(distPoint,objLocation);
+    float result = PVector.dist(distPoint,objLocation);
+    println(result);
+    return  result;
     
   }
   
@@ -53,7 +54,7 @@ static class Physics{
             dist.x = b.location.x - testEdge.x;
             dist.y = b.location.y - testEdge.y;
             
-            if(calDistance(dist,b.location) <= b.rad){
+            if(calDistance(b.location,dist) <= b.rad){
                return true;
             }else {
                return false;
