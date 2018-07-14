@@ -20,10 +20,12 @@ class Static_Body{
         rect(location.x,location.y, size.x , size.y);
       } 
       else if (shape.equals("rircle")) {
+        fill(255);
         ellipse(location.x,location.y, size.x , size.y);
       } 
       else {
       // default
+        fill(255);
         ellipse(location.x,location.y, size.x , size.y);
        
       }

@@ -4,8 +4,8 @@ Static_Body floor;
 float MASS_MULT = 1.2f;
 
 //Forces
-PVector gravity = new PVector(0,9.8f);
-PVector normal = gravity.copy().mult(-1f);
+static PVector gravity = new PVector(0,90f);
+static PVector normal = gravity.copy().mult(-1f);
 PVector wind = new PVector(5f,-0.0f);
 static float pixelFactor;
 
@@ -34,7 +34,7 @@ void draw() {
   background(0);
   floor.display();
   Physics.applyForce(gravity,ball);
-  Physics.applyForce(wind,ball);
+  //Physics.applyForce(wind,ball);
   
   if(Physics.checkCollisionStatic(ball,floor)){
     

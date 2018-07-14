@@ -15,11 +15,17 @@ static class Physics{
    return vel;
   }
   
-   private static float calDistance(PVector distPoint , PVector objLocation){
+  
+  private static void performImpact(Body b){
     
-    float result = PVector.dist(distPoint,objLocation);
-    println(result);
-    return  result;
+    if(b.velocity.mag() > 0.5){
+       b.velocity.y *= -0.95;
+     }
+     else
+     {
+       b.stopMove();
+       applyForce(normal,b);
+     }
     
   }
   
@@ -39,22 +45,24 @@ static class Physics{
           
           case "circle":
             
-            PVector testEdge = new PVector();
+            float testX = b.location.x, testY = b.location.y;
             if (b.location.x < sb.location.x)
-                testEdge.x = sb.location.x;                    // left edge
+                testX = sb.location.x;                    // left edge
             else if (b.location.x > sb.location.x + sb.size.x) 
-                testEdge.x = sb.location.x + sb.size.x;        // right edge
+                testX = sb.location.x + sb.size.x;        // right edge
 
             if (b.location.y < sb.location.y)
-                testEdge.y = sb.location.y;                    //  top edge
+                testY = sb.location.y;                    //  top edge
             else if (b.location.y > sb.location.y + sb.size.y) 
-                testEdge.y = sb.location.y + sb.size.y;        // bottom edge
+                testY = sb.location.y + sb.size.y;        // bottom edge
           
-            PVector dist = new PVector();
-            dist.x = b.location.x - testEdge.x;
-            dist.y = b.location.y - testEdge.y;
-            
-            if(calDistance(b.location,dist) <= b.rad){
+            float distX = 0 , distY = 0;
+            distX = b.location.x - testX;
+            distY = b.location.y - testY;
+            float distance = sqrt( (distX*distX) + (distY*distY) );
+         
+            if(distance <= b.b_height){
+               performImpact(b);
                return true;
             }else {
                return false;
